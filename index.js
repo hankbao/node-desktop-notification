@@ -360,8 +360,8 @@ ipc.on('electron-notify-click', function (event, winId, notificationObj) {
       closeNotification: buildCloseNotificationSafely(closeFunc)
     })
     delete notificationWindow.electronNotifyOnClickFunc
+    closeFunc()
   }
-  closeFunc()
 })
 
 /*
