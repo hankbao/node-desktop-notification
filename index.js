@@ -4,7 +4,7 @@ const _ = require('lodash')
 const path = require('path')
 const async = require('async')
 const electron = require('electron')
-const BrowserWindow = electron.BrowserWindow
+const BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow;
 const ipc = electron.ipcMain
 
 // One animation at a time
