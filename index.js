@@ -4,8 +4,8 @@ const _ = require('lodash')
 const path = require('path')
 const async = require('async')
 const electron = require('electron')
-const BrowserWindow = electron.BrowserWindow
-const ipc = electron.ipcMain
+const BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow
+const ipc = electron.ipcMain || electron.ipcRenderer
 
 // One animation at a time
 const AnimationQueue = function(options) {
