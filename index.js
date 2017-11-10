@@ -297,14 +297,13 @@ function buildCloseNotification(notificationWindow, notificationObj, getTimeoutI
       closedNotifications[notificationObj.id] = true
     }
 
-    if (notificationWindow.electronNotifyOnCloseFunc && !notificationWindow.clickFunctionFired) {
+    if (notificationWindow.electronNotifyOnCloseFunc) {
       notificationWindow.electronNotifyOnCloseFunc({
         event: event,
         id: notificationObj.id
       })
       delete notificationWindow.electronNotifyOnCloseFunc
     }
-    delete notificationWindow.clickFunctionFired
 
     // reset content
     notificationWindow.webContents.send('electron-notify-reset')
@@ -352,7 +351,6 @@ ipc.on('electron-notify-click', function (event, winId, notificationObj) {
   }
   let notificationWindow = BrowserWindow.fromId(winId)
   if (notificationWindow && notificationWindow.electronNotifyOnClickFunc) {
-    notificationWindow.clickFunctionFired = true
     let closeFunc = buildCloseNotification(notificationWindow, notificationObj)
     notificationWindow.electronNotifyOnClickFunc({
       event: 'click',
@@ -360,7 +358,6 @@ ipc.on('electron-notify-click', function (event, winId, notificationObj) {
       closeNotification: buildCloseNotificationSafely(closeFunc)
     })
     delete notificationWindow.electronNotifyOnClickFunc
-    closeFunc()
   }
 })
 
