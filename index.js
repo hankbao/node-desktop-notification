@@ -4,8 +4,8 @@ const _ = require('lodash')
 const path = require('path')
 const async = require('async')
 const electron = require('electron')
-const BrowserWindow = electron.BrowserWindow
-const ipc = electron.ipcMain
+const BrowserWindow = electron.BrowserWindow || electron.remote.BrowserWindow
+const ipc = electron.ipcMain || electron.ipcRenderer
 
 // One animation at a time
 const AnimationQueue = function(options) {
@@ -108,10 +108,10 @@ let config = {
   },
   htmlTemplate: '<html>\n'
   + '<head></head>\n'
-  + '<body style="overflow: hidden; -webkit-user-select: none;">\n'
+  + '<body style="overflow: hidden; -webkit-user-select: none;" id="body-top">\n'
   + '<div id="container">\n'
-  + ' <img src="" id="appIcon" />\n'
-  + ' <img src="" id="image" />\n'
+  + ' <img src="" id="appIcon"/>\n'
+  + ' <img src="" id="image" class="pulse"/>\n'
   + ' <div id="text">\n'
   + '   <b id="title"></b>\n'
   + '   <p id="message"></p>\n'
