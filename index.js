@@ -359,8 +359,7 @@ ipc.on('electron-notify-click', function (event, winId, notificationObj) {
   let notificationWindow = BrowserWindow.fromId(winId);
   if (notificationWindow && notificationWindow.electronNotifyOnClickFunc) {
     notificationWindow.clickFunctionFired = true;
-
-    let closeFunc = buildCloseNotification(notificationWindow, notificationObj);
+    let closeFunc                         = buildCloseNotification(notificationWindow, notificationObj);
     notificationWindow.electronNotifyOnClickFunc({
       event:             'click',
       id:                notificationObj.id,
@@ -431,7 +430,7 @@ function moveNotificationAnimation (i, done) {
       return done(null, 'done');
     }
     // Move one step down
-    notificationWindow.setPosition(config.firstPos.x, Math.trunc(startY + curStep * step));
+    notificationWindow.setPosition(config.firstPos.x, startY + curStep * step);
     curStep++;
   }, config.animationStepMs);
 }
